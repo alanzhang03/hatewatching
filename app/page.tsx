@@ -42,22 +42,27 @@ export default function Home() {
         </header>
 
         <div className={styles.controls}>
-          <input
-            type='text'
-            className={styles.search}
-            placeholder='Search by name/account name...'
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-          />
-          <select
-            className={styles.sortSelect}
-            value={sortMode}
-            onChange={(e) => setSortMode(e.target.value as SortMode)}
-          >
-            <option value='default'>Default order</option>
-            <option value='az'>Name A–Z</option>
-            <option value='accounts'># of accounts</option>
-          </select>
+          <div className={styles.controlsLeft}>
+            <input
+              type='text'
+              className={styles.search}
+              placeholder='Search by name/account name...'
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <select
+              className={styles.sortSelect}
+              value={sortMode}
+              onChange={(e) => setSortMode(e.target.value as SortMode)}
+            >
+              <option value='default'>Default order</option>
+              <option value='az'>Name A–Z</option>
+              <option value='accounts'># of accounts</option>
+            </select>
+          </div>
+          <span className={styles.resultCount}>
+            Showing {filteredPlayers.length} of {players.length}
+          </span>
         </div>
 
         {filteredPlayers.length === 0 ? (
