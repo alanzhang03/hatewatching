@@ -27,6 +27,12 @@ export const players: Player[] = [
         puuid:
           '9H5QXioe_ZQMq7VCoLKxZ-oNZTzxHb8VXpfXuOw8nC2SnV_worJEFFkDTIoyCDY5YIsqk8etUF9h1Q',
       },
+      {
+        gameName: 'ReformedCloudy',
+        tagLine: 'NA1',
+        puuid:
+          'iSuPh7HFy3cJLBttPFWl6NCflpQg09yyoIQaQWVT-nFLeKCvec1ZQUvvs3CV9qvCZLREOa_D4dnozA',
+      },
     ],
   },
   {
