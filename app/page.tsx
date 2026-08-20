@@ -23,9 +23,13 @@ export default function Home() {
       });
     }
     if (sortMode === 'az') {
-      result = [...result].sort((a, b) => a.displayName.localeCompare(b.displayName));
+      result = [...result].sort((a, b) =>
+        a.displayName.localeCompare(b.displayName),
+      );
     } else if (sortMode === 'accounts') {
-      result = [...result].sort((a, b) => b.accounts.length - a.accounts.length);
+      result = [...result].sort(
+        (a, b) => b.accounts.length - a.accounts.length,
+      );
     }
     return result;
   }, [query, sortMode]);
