@@ -153,6 +153,12 @@ export const players: Player[] = [
         puuid:
           'L3VrYJpDZq5LQDUzJRtuG4Zuyk-JZczJsRnLI-VduxgU_dutjkc5xavMuTt6XBWpgRONkFQvqC6W9w',
       },
+      {
+        gameName: 'bobiel',
+        tagLine: 'bob',
+        puuid:
+          'U0X2_FhRsYPwE_jDDmKejj8t3GfWbY0zsc9hW0XCqresDChx-bOjEV56NTICjpd6Ht1CclryFyo3tw',
+      },
     ],
   },
 
