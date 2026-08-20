@@ -1,5 +1,5 @@
 import type { LolAccount } from '@/lib/players';
-import { opggUrl, uggUrl, porofessorUrl, deepLolUrl } from '@/lib/links';
+import { opggUrl, uggUrl, leagueOfGraphsUrl, deepLolUrl } from '@/lib/links';
 import { CopyRiotId } from './CopyRiotId';
 import styles from './page.module.css';
 
@@ -101,11 +101,11 @@ export function AccountRow({
         </a>
         <a
           className={`${styles.linkChip} ${styles.linkChipPorofessor}`}
-          href={porofessorUrl(account)}
+          href={leagueOfGraphsUrl(account)}
           target='_blank'
           rel='noopener noreferrer'
         >
-          porofessor
+          League of graphs
         </a>
       </span>
     </li>

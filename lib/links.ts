@@ -12,8 +12,8 @@ export function uggUrl(account: LolAccount) {
   return `https://u.gg/lol/profile/na1/${encodeURIComponent(riotId(account))}/overview`;
 }
 
-export function porofessorUrl(account: LolAccount) {
-  return `https://porofessor.gg/live/na/${encodeURIComponent(riotId(account))}#championsData-all-queues`;
+export function leagueOfGraphsUrl(account: LolAccount) {
+  return `https://www.leagueofgraphs.com/summoner/na/${encodeURIComponent(riotId(account))}#championsData-all-queues`;
 }
 
 export function deepLolUrl(account: LolAccount) {

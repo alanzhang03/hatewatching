@@ -22,6 +22,7 @@ const TIER_ORDER = {
 
 const DIVISION_ORDER = { IV: 0, III: 1, II: 2, I: 3 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function bestRankScore(player: Player, ranks: any[], queueType: string) {
   let best = -1;
 
@@ -48,6 +49,7 @@ export function HomeClient({
   ranks,
 }: {
   players: Player[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ranks: any[];
 }) {
   const [query, setQuery] = useState('');
