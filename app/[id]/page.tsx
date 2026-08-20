@@ -1,9 +1,11 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { players } from '@/lib/players';
 import { PlayerAvatar } from '../PlayerAvatar';
 import { AccountRow } from '../AccountRow';
 import { CopyLinkButton } from '../CopyLinkButton';
+import { MatchHistory } from './MatchHistory';
 import styles from '../page.module.css';
 
 function findPlayer(id: string) {
@@ -53,6 +55,11 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
             <li className={styles.empty}>no accounts yet</li>
           )}
         </ul>
+
+        <h2 className={styles.sectionHeading}>Recent Matches</h2>
+        <Suspense fallback={<p className={styles.empty}>Loading matches...</p>}>
+          <MatchHistory accounts={player.accounts} />
+        </Suspense>
       </main>
     </div>
   );

@@ -5,14 +5,14 @@ const RIOT_API_TOKEN = process.env.RIOT_API_KEY;
 const REGIONAL_BASE_URL = 'https://americas.api.riotgames.com';
 const PLATFORM_BASE_URL = 'https://na1.api.riotgames.com';
 
-async function riotFetch(url: string) {
+async function riotFetch(url: string, revalidate = 600) {
   if (!RIOT_API_TOKEN) {
     throw new Error('RIOT_API_KEY is not set');
   }
 
   const res = await fetch(url, {
     headers: { 'X-Riot-Token': RIOT_API_TOKEN },
-    next: { revalidate: 600 },
+    next: { revalidate },
   });
 
   if (!res.ok) {
@@ -63,4 +63,55 @@ export async function getRanks() {
     }
   }
   return ranks;
+}
+
+export async function getMatchHistoryIDs(puuid: string) {
+  let matchHistory;
+  try {
+    const response = await riotFetch(
+      `${REGIONAL_BASE_URL}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5`,
+    );
+    matchHistory = response;
+  } catch (err) {
+    console.error(`Error fetching matches for ${puuid}`, err);
+  }
+
+  return matchHistory;
+}
+
+export async function getMatchHistoryInfo(matchId: string) {
+  let matchHistoryInfo;
+  try {
+    const response = await riotFetch(
+      `${REGIONAL_BASE_URL}/lol/match/v5/matches/${matchId}`,
+      604800,
+    );
+    matchHistoryInfo = response;
+  } catch (err) {
+    console.error(`Error fetching match information for ${matchId}`, err);
+  }
+
+  return matchHistoryInfo;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getPlayerMatchHistory(accounts: any[]) {
+  const matches = [];
+
+  for (const account of accounts) {
+    try {
+      const matchIds = await getMatchHistoryIDs(account.puuid);
+      for (const matchId of matchIds) {
+        const match = await getMatchHistoryInfo(matchId);
+        if (match) matches.push(match);
+      }
+    } catch (err) {
+      console.error(
+        `Error fetching match history for ${account.gameName}#${account.tagLine}:`,
+        err,
+      );
+    }
+  }
+
+  return matches;
 }

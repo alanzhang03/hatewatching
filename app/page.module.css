@@ -194,6 +194,86 @@
   color: var(--text-primary);
 }
 
+.sectionHeading {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.matchAccountLabel {
+  min-width: 110px;
+  font-family: var(--font-geist-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.matchList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.matchRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border-left: 3px solid var(--border);
+  background: var(--row-bg);
+}
+
+.matchRowWin {
+  border-left-color: #2fa75f;
+  background: #2fa75f14;
+}
+
+.matchRowLoss {
+  border-left-color: #d24f4f;
+  background: #d24f4f14;
+}
+
+.matchResultWin {
+  min-width: 34px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #2fa75f;
+}
+
+.matchResultLoss {
+  min-width: 34px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #d24f4f;
+}
+
+.matchChampion {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.matchKda {
+  font-family: var(--font-geist-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.matchQueue {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.matchMeta {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
 .copyLinkButton {
   padding: 8px 14px;
   border: 1px solid var(--border);
