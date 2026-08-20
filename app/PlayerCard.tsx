@@ -9,7 +9,14 @@ import { AccountRow } from './AccountRow';
 
 const VISIBLE_COUNT = 2;
 
-export function PlayerCard({ player }: { player: Player }) {
+export function PlayerCard({
+  player,
+  ranks,
+}: {
+  player: Player;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ranks: any[];
+}) {
   const [expanded, setExpanded] = useState(false);
 
   const hasMore = player.accounts.length > VISIBLE_COUNT;
@@ -24,9 +31,16 @@ export function PlayerCard({ player }: { player: Player }) {
         <h2>{player.displayName}</h2>
       </Link>
       <ul className={styles.accounts}>
-        {visibleAccounts.map((account) => (
-          <AccountRow key={`${account.gameName}-${account.tagLine}`} account={account} />
-        ))}
+        {visibleAccounts.map((account) => {
+          const rankEntry = ranks.find((r) => r.userName === account.gameName);
+          return (
+            <AccountRow
+              key={`${account.gameName}-${account.tagLine}`}
+              account={account}
+              rank={rankEntry?.rank}
+            />
+          );
+        })}
         {player.accounts.length === 0 && (
           <li className={styles.empty}>no accounts yet</li>
         )}

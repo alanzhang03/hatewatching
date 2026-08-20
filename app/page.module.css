@@ -231,7 +231,7 @@
 }
 
 .playerHeader h2 {
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
   color: var(--text-primary);
 }
@@ -259,6 +259,97 @@
   font-style: italic;
 }
 
+.riotIdRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
+
+.rankBadgeGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rankBadge {
+  flex-shrink: 0;
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.rankBadgeUnranked {
+  border-color: var(--border);
+  background: var(--chip-bg);
+  color: var(--text-tertiary);
+}
+
+.rankIron {
+  border-color: #6e6b6b;
+  background: #6e6b6b22;
+  color: #6e6b6b;
+}
+
+.rankBronze {
+  border-color: #a9683d;
+  background: #a9683d22;
+  color: #a9683d;
+}
+
+.rankSilver {
+  border-color: #7c868f;
+  background: #7c868f22;
+  color: #7c868f;
+}
+
+.rankGold {
+  border-color: #c79015;
+  background: #c7901522;
+  color: #c79015;
+}
+
+.rankPlatinum {
+  border-color: #2fa79a;
+  background: #2fa79a22;
+  color: #2fa79a;
+}
+
+.rankEmerald {
+  border-color: #129654;
+  background: #12965422;
+  color: #129654;
+}
+
+.rankDiamond {
+  border-color: #3e6fd6;
+  background: #3e6fd622;
+  color: #3e6fd6;
+}
+
+.rankMaster {
+  border-color: #c43d91;
+  background: #c43d9122;
+  color: #c43d91;
+}
+
+.rankGrandmaster {
+  border-color: #d42f2f;
+  background: #d42f2f22;
+  color: #d42f2f;
+}
+
+.rankChallenger {
+  border-color: #6fe3ef;
+  background: linear-gradient(135deg, #f4c87433, #69e6f033);
+  color: #b8860b;
+}
+
 .riotId {
   display: block;
   background: none;
@@ -266,7 +357,7 @@
   padding: 0;
   margin: 0;
   font-family: var(--font-geist-mono);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-primary);
   cursor: pointer;

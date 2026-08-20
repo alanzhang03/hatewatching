@@ -180,4 +180,22 @@ export const players: Player[] = [
       },
     ],
   },
+  {
+    id: 'Tean',
+    displayName: 'Tean',
+    accounts: [
+      {
+        gameName: 'CodeMint',
+        tagLine: 'NA1',
+        puuid:
+          'NYI22wJWibkVUvGGSCQyxLKWVmwBKGEUIesMsF9emKxcqP9y9qSGjKdyJnwffXNqFIkmGVWWrLh8HA',
+      },
+      {
+        gameName: 'Crippled Chimp',
+        tagLine: 'NA1',
+        puuid:
+          'Ruuh0_iP6G1qa9qFlPUS7oZVavuM6OGNa5FaIkQi6u8KLEp5F9Z2kaXQDZHQNQiGxYIyMFNRWdo1kw',
+      },
+    ],
+  },
 ];
