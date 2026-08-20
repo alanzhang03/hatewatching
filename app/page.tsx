@@ -31,15 +31,17 @@ export default function Home() {
         </header>
 
         <input
-          type="text"
+          type='text'
           className={styles.search}
-          placeholder="Search by name or Riot ID..."
+          placeholder='Search by name/account name...'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
 
         {filteredPlayers.length === 0 ? (
-          <p className={styles.noResults}>No matches for &ldquo;{query}&rdquo;</p>
+          <p className={styles.noResults}>
+            No matches for &ldquo;{query}&rdquo;
+          </p>
         ) : (
           <div className={styles.players}>
             {filteredPlayers.map((player) => (
