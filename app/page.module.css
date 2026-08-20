@@ -362,6 +362,7 @@
   color: var(--text-primary);
   cursor: pointer;
   text-align: left;
+  transition: color 0.18s ease;
 }
 
 .riotId:hover {
@@ -387,6 +388,11 @@
   color: var(--text-secondary);
   font-size: 12px;
   font-weight: 600;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .linkChipOpgg {
@@ -416,26 +422,31 @@
 .linkChip:hover {
   background: var(--chip-hover);
   color: var(--accent);
+  transform: translateY(-1px);
 }
 
 .linkChipOpgg:hover {
-  background: #6fa0cc22;
-  color: #89a9c4;
+  border-color: #4fa8ff;
+  background: #4fa8ff33;
+  color: #4fa8ff;
 }
 
 .linkChipUgg:hover {
-  background: #5b7ab822;
-  color: #93a1c0;
+  border-color: #6f95e8;
+  background: #3d6fd133;
+  color: #6f95e8;
 }
 
 .linkChipDeeplol:hover {
-  background: #4ea86f22;
-  color: #8fbaa1;
+  border-color: #39e75f;
+  background: #39e75f33;
+  color: #39e75f;
 }
 
 .linkChipPorofessor:hover {
-  background: #c2a03a22;
-  color: #c2ac6e;
+  border-color: #e8b923;
+  background: #e8b92333;
+  color: #e8b923;
 }
 
 .readMore {
