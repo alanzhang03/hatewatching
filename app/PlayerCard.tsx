@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import type { Player } from '@/lib/players';
 import { PlayerAvatar } from './PlayerAvatar';
@@ -18,6 +18,7 @@ export function PlayerCard({
   ranks: any[];
 }) {
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
 
   const hasMore = player.accounts.length > VISIBLE_COUNT;
   const visibleAccounts = expanded
@@ -25,12 +26,15 @@ export function PlayerCard({
     : player.accounts.slice(0, VISIBLE_COUNT);
 
   return (
-    <section className={styles.player}>
-      <Link href={`/${player.id.toLowerCase()}`} className={styles.playerHeader}>
+    <section
+      className={styles.player}
+      onClick={() => router.push(`/${player.id.toLowerCase()}`)}
+    >
+      <div className={styles.playerHeader}>
         <PlayerAvatar id={player.id} displayName={player.displayName} />
         <h2>{player.displayName}</h2>
-      </Link>
-      <ul className={styles.accounts}>
+      </div>
+      <ul className={styles.accounts} onClick={(e) => e.stopPropagation()}>
         {visibleAccounts.map((account) => {
           const rankEntry = ranks.find((r) => r.userName === account.gameName);
           return (
@@ -49,7 +53,10 @@ export function PlayerCard({
         <button
           type="button"
           className={styles.readMore}
-          onClick={() => setExpanded((v) => !v)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setExpanded((v) => !v);
+          }}
         >
           {expanded ? 'Show less' : `Show ${player.accounts.length - VISIBLE_COUNT} more`}
         </button>

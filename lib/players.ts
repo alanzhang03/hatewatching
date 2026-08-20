@@ -33,6 +33,12 @@ export const players: Player[] = [
         puuid:
           'iSuPh7HFy3cJLBttPFWl6NCflpQg09yyoIQaQWVT-nFLeKCvec1ZQUvvs3CV9qvCZLREOa_D4dnozA',
       },
+      {
+        gameName: 'gunnar',
+        tagLine: '2969',
+        puuid:
+          'aduSb8AaiLCgN6AE10EdApiMzbfwSy3yQPh_eNoQtvOcbIO2hdRkF8HMRsdKVYc_PCL6sOafphLNYA',
+      },
     ],
   },
   {
