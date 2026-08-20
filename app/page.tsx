@@ -1,24 +1,36 @@
 import styles from './page.module.css';
 import { players } from '@/lib/players';
 import { opggUrl, uggUrl, porofessorUrl, deepLolUrl } from '@/lib/links';
+import { PlayerAvatar } from './PlayerAvatar';
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1 className={styles.title}>Accounts</h1>
+        <header className={styles.header}>
+          <h1 className={styles.title}>chogwarts accounts</h1>
+          <p className={styles.subtitle}>
+            {players.length} players &middot;{' '}
+            {players.reduce((sum, p) => sum + p.accounts.length, 0)} accounts
+          </p>
+        </header>
         <div className={styles.players}>
           {players.map((player) => (
             <section key={player.id} className={styles.player}>
-              <h2>{player.displayName}</h2>
+              <div className={styles.playerHeader}>
+                <PlayerAvatar id={player.id} displayName={player.displayName} />
+                <h2>{player.displayName}</h2>
+              </div>
               <ul className={styles.accounts}>
                 {player.accounts.map((account) => (
                   <li key={`${account.gameName}-${account.tagLine}`}>
                     <span className={styles.riotId}>
-                      {account.gameName}#{account.tagLine}
+                      {account.gameName}
+                      <span className={styles.tagLine}>#{account.tagLine}</span>
                     </span>
                     <span className={styles.linkGroup}>
                       <a
+                        className={styles.linkChip}
                         href={opggUrl(account)}
                         target='_blank'
                         rel='noopener noreferrer'
@@ -26,6 +38,7 @@ export default function Home() {
                         op.gg
                       </a>
                       <a
+                        className={styles.linkChip}
                         href={uggUrl(account)}
                         target='_blank'
                         rel='noopener noreferrer'
@@ -33,6 +46,7 @@ export default function Home() {
                         u.gg
                       </a>
                       <a
+                        className={styles.linkChip}
                         href={deepLolUrl(account)}
                         target='_blank'
                         rel='noopener noreferrer'
@@ -40,6 +54,7 @@ export default function Home() {
                         deeplol
                       </a>
                       <a
+                        className={styles.linkChip}
                         href={porofessorUrl(account)}
                         target='_blank'
                         rel='noopener noreferrer'
@@ -49,6 +64,9 @@ export default function Home() {
                     </span>
                   </li>
                 ))}
+                {player.accounts.length === 0 && (
+                  <li className={styles.empty}>no accounts yet</li>
+                )}
               </ul>
             </section>
           ))}

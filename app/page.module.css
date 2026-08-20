@@ -1,10 +1,16 @@
 .page {
-  --background: #fafafa;
+  --background: #f5f6f8;
   --foreground: #fff;
 
-  --text-primary: #000;
-  --text-secondary: #666;
-  --border: #ebebeb;
+  --text-primary: #0f0f10;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --border: #e8e9ec;
+  --accent: #5b5ff5;
+  --accent-soft: #eef0ff;
+  --chip-bg: #f4f4f6;
+  --chip-hover: #ececf9;
+  --shadow: 0 1px 2px rgba(16, 16, 20, 0.04), 0 8px 24px rgba(16, 16, 20, 0.04);
 
   display: flex;
   flex: 1;
@@ -19,32 +25,86 @@
   display: flex;
   flex: 1;
   width: 100%;
-  max-width: 800px;
+  max-width: 1400px;
   flex-direction: column;
   align-items: stretch;
-  background-color: var(--foreground);
   padding: 60px;
-  gap: 32px;
+  gap: 36px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .title {
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: -1.2px;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.9px;
   color: var(--text-primary);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .players {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+  gap: 16px;
+  align-items: start;
 }
 
-.player h2 {
-  font-size: 20px;
+.player {
+  background-color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.player:hover {
+  border-color: var(--accent);
+}
+
+.playerHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.avatarImg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.playerHeader h2 {
+  font-size: 16px;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 12px;
 }
 
 .accounts {
@@ -56,34 +116,50 @@
 
 .accounts li {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
-  padding: 12px 16px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--background);
+  border-radius: 10px;
+}
+
+.empty {
+  color: var(--text-tertiary);
+  font-size: 13px;
+  font-style: italic;
 }
 
 .riotId {
   font-family: var(--font-geist-mono);
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-primary);
+}
+
+.tagLine {
+  font-weight: 400;
+  color: var(--text-tertiary);
 }
 
 .linkGroup {
   display: flex;
-  gap: 16px;
-  font-size: 14px;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
-.linkGroup a {
+.linkChip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--chip-bg);
   color: var(--text-secondary);
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
 }
 
-.linkGroup a:hover {
-  color: var(--text-primary);
+.linkChip:hover {
+  background: var(--chip-hover);
+  color: var(--accent);
 }
 
 @media (max-width: 600px) {
@@ -94,11 +170,17 @@
 
 @media (prefers-color-scheme: dark) {
   .page {
-    --background: #000;
-    --foreground: #000;
+    --background: #0a0a0b;
+    --foreground: #151517;
 
     --text-primary: #ededed;
-    --text-secondary: #999;
-    --border: #1a1a1a;
+    --text-secondary: #9ca0a8;
+    --text-tertiary: #6b6f76;
+    --border: #232326;
+    --accent: #8b8ff9;
+    --accent-soft: #211f3d;
+    --chip-bg: #1c1c1f;
+    --chip-hover: #24243a;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
   }
 }

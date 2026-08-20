@@ -19,6 +19,14 @@ export const players: Player[] = [
     ],
   },
   {
+    id: 'Yeungin',
+    displayName: 'Yeungin',
+    accounts: [
+      { gameName: 'Yeungin', tagLine: 'snafu' },
+      { gameName: 'The Solo Leveler', tagLine: 'tower' },
+    ],
+  },
+  {
     id: 'Chow',
     displayName: 'Chow',
     accounts: [
@@ -51,14 +59,7 @@ export const players: Player[] = [
     displayName: 'Jon',
     accounts: [{ gameName: 'SavagePastaMan', tagLine: 'psvm' }],
   },
-  {
-    id: 'Yeungin',
-    displayName: 'Yeungin',
-    accounts: [
-      { gameName: 'Yeungin', tagLine: 'snafu' },
-      { gameName: 'The Solo Leveler', tagLine: 'tower' },
-    ],
-  },
+
   {
     id: 'Kotee',
     displayName: 'Kotee',
