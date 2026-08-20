@@ -12,6 +12,7 @@ async function riotFetch(url: string) {
 
   const res = await fetch(url, {
     headers: { 'X-Riot-Token': RIOT_API_TOKEN },
+    next: { revalidate: 600 },
   });
 
   if (!res.ok) {
@@ -44,4 +45,22 @@ export async function fetchPlayerPuuid() {
   return results;
 }
 
-export async function 
+export async function getRanks() {
+  let ranks = [];
+  for (const discordUser of players) {
+    for (const account of discordUser.accounts) {
+      const url = `${PLATFORM_BASE_URL}/lol/league/v4/entries/by-puuid/${account.puuid}`;
+      const userName = account.gameName;
+      try {
+        const data = await riotFetch(url);
+        if (data) ranks.push({ userName, rank: data });
+      } catch (err) {
+        console.error(
+          `Error fetching puuid for ${account.gameName}#${account.tagLine}:`,
+          err,
+        );
+      }
+    }
+  }
+  return ranks;
+}
