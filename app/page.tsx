@@ -5,19 +5,30 @@ import styles from './page.module.css';
 import { players } from '@/lib/players';
 import { PlayerCard } from './PlayerCard';
 
+type SortMode = 'default' | 'az' | 'accounts';
+
 export default function Home() {
   const [query, setQuery] = useState('');
+  const [sortMode, setSortMode] = useState<SortMode>('default');
 
   const filteredPlayers = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return players;
-    return players.filter((player) => {
-      if (player.displayName.toLowerCase().includes(q)) return true;
-      return player.accounts.some((account) =>
-        `${account.gameName}#${account.tagLine}`.toLowerCase().includes(q),
-      );
-    });
-  }, [query]);
+    let result = players;
+    if (q) {
+      result = players.filter((player) => {
+        if (player.displayName.toLowerCase().includes(q)) return true;
+        return player.accounts.some((account) =>
+          `${account.gameName}#${account.tagLine}`.toLowerCase().includes(q),
+        );
+      });
+    }
+    if (sortMode === 'az') {
+      result = [...result].sort((a, b) => a.displayName.localeCompare(b.displayName));
+    } else if (sortMode === 'accounts') {
+      result = [...result].sort((a, b) => b.accounts.length - a.accounts.length);
+    }
+    return result;
+  }, [query, sortMode]);
 
   return (
     <div className={styles.page}>
@@ -30,13 +41,24 @@ export default function Home() {
           </p>
         </header>
 
-        <input
-          type='text'
-          className={styles.search}
-          placeholder='Search by name/account name...'
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+        <div className={styles.controls}>
+          <input
+            type='text'
+            className={styles.search}
+            placeholder='Search by name/account name...'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <select
+            className={styles.sortSelect}
+            value={sortMode}
+            onChange={(e) => setSortMode(e.target.value as SortMode)}
+          >
+            <option value='default'>Default order</option>
+            <option value='az'>Name A–Z</option>
+            <option value='accounts'># of accounts</option>
+          </select>
+        </div>
 
         {filteredPlayers.length === 0 ? (
           <p className={styles.noResults}>
