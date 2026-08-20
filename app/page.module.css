@@ -50,9 +50,35 @@
   color: var(--text-secondary);
 }
 
+.search {
+  width: 100%;
+  max-width: 360px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--foreground);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.search::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.noResults {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
 .players {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(305px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 16px;
   align-items: start;
 }
@@ -131,10 +157,21 @@
 }
 
 .riotId {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
   font-family: var(--font-geist-mono);
   font-size: 13px;
   font-weight: 600;
   color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+
+.riotId:hover {
+  color: var(--accent);
 }
 
 .tagLine {
@@ -159,6 +196,25 @@
 
 .linkChip:hover {
   background: var(--chip-hover);
+  color: var(--accent);
+}
+
+.readMore {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 6px;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.readMore:hover {
   color: var(--accent);
 }
 

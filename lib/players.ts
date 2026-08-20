@@ -35,6 +35,28 @@ export const players: Player[] = [
     ],
   },
   {
+    id: 'Kotee',
+    displayName: 'Kotee',
+    accounts: [
+      { gameName: 'koopy', tagLine: 'koopy' },
+      { gameName: 'koTeeFT', tagLine: 'NA1' },
+      { gameName: 'piss slit', tagLine: 'koopy' },
+    ],
+  },
+  {
+    id: 'Sean',
+    displayName: 'Sean',
+    accounts: [
+      { gameName: 'TrianglePlant', tagLine: 'NA1' },
+      { gameName: 'P00CHYENA', tagLine: 'NA1' },
+    ],
+  },
+  {
+    id: 'Wandrew',
+    displayName: 'Wandrew',
+    accounts: [{ gameName: 'tyrese maxey', tagLine: 'pizza' }],
+  },
+  {
     id: 'Matt',
     displayName: 'Matt',
     accounts: [{ gameName: 'Magmacuber15', tagLine: 'NA1' }],
@@ -44,11 +66,7 @@ export const players: Player[] = [
     displayName: 'Kiwi',
     accounts: [{ gameName: 'nasty宝宝', tagLine: 'freak' }],
   },
-  {
-    id: 'Wandrew',
-    displayName: 'Wandrew',
-    accounts: [{ gameName: 'tyrese maxey', tagLine: 'pizza' }],
-  },
+
   {
     id: 'Dorkynerd',
     displayName: 'Dorkynerd',
@@ -59,27 +77,9 @@ export const players: Player[] = [
     displayName: 'Jon',
     accounts: [{ gameName: 'SavagePastaMan', tagLine: 'psvm' }],
   },
-
-  {
-    id: 'Kotee',
-    displayName: 'Kotee',
-    accounts: [
-      { gameName: 'koopy', tagLine: 'koopy' },
-      { gameName: 'koTeeFT', tagLine: 'NA1' },
-      { gameName: 'piss slit', tagLine: 'koopy' },
-    ],
-  },
   {
     id: 'Marsh',
     displayName: 'Marsh',
     accounts: [{ gameName: 'matcha', tagLine: 'keshi' }],
-  },
-  {
-    id: 'Sean',
-    displayName: 'Sean',
-    accounts: [
-      { gameName: 'TrianglePlant', tagLine: 'NA1' },
-      { gameName: 'P00CHYENA', tagLine: 'NA1' },
-    ],
   },
 ];
