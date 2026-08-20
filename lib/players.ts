@@ -19,13 +19,13 @@ export const players: Player[] = [
         gameName: 'Cloudee',
         tagLine: '1234',
         puuid:
-          'tAUSJmtMVWzpXz84D1Ky43SsVXspzFGGSNCpPr3UMOf9qq93PSmIxn5Ljndxl4FNj2wLRE5HowfEnA',
+          'TkDnpotUZ_cPd-c2X0ScEqIc4Tz6TcUqjcwPWYUoRrAvsVeK_acbPUAnAq3Z1MsxJmH7OTPyg9DDTA',
       },
       {
         gameName: 'thorwinonions',
         tagLine: 'NA1',
         puuid:
-          '1gA8lPmebHsZ8jpSa4S3PVAbusAB_dH6tobD86xk_puvfVYgyluBE1x_MnajMO7V_LftzHyp8679TQ',
+          '9H5QXioe_ZQMq7VCoLKxZ-oNZTzxHb8VXpfXuOw8nC2SnV_worJEFFkDTIoyCDY5YIsqk8etUF9h1Q',
       },
     ],
   },
@@ -37,13 +37,13 @@ export const players: Player[] = [
         gameName: 'Yeungin',
         tagLine: 'snafu',
         puuid:
-          'yNkHN7XxxijYAeAcCKCH_aeEj037tD3cHXB9Y72Ifr9VWdN0LReyY1iXBCfRDA_T1oqD2NK-c9rM-w',
+          'JUztaBIa6-W9z7zr4OX1y3Ft9Q8NT_GAB-3Ubj2kovNyqrxmrAe7nU3EpN3HIKuQ2J3yBPcbyqLnRw',
       },
       {
         gameName: 'The Solo Leveler',
         tagLine: 'tower',
         puuid:
-          'TEVA0gNnf8AvMIZRepHUSvyxja3XU1ts0x_hNoJB9TLy3aJJ4PuNeiu2-TDMuT8Fg1N33s7K1NJbuw',
+          'Mc8YuFovLPIMukg4Tv--EToIU_Vlh0Q70AljpxcMLYD0TQflFzbtIOROzx9fRG1aTSO4yE0FNhPupg',
       },
     ],
   },
@@ -55,13 +55,13 @@ export const players: Player[] = [
         gameName: 'pieguykai',
         tagLine: '4217',
         puuid:
-          'udxNtrgLUC5RJFetGT9GAxbr5A7ZWuc3KD5Nq3egL0MEYyaTyn_-SVIFzJHAycQNCbbJIr-K1ARSgA',
+          '9zGi_DafSe6UxHL_UvykAbMAYkcIHiN17JghtUY00zTOcCb-guzms5HAXLRGaLBGaob-TyxsiMB9Hw',
       },
       {
         gameName: 'ilysomatcha',
         tagLine: 'pizza',
         puuid:
-          'HXqgbKsoNe3LxfNRearlcfzOwpUBbE2v-KTCNcwMe3VT4D6calprNDl-N4WzD9ziv0vOcUZFK2IVKw',
+          'nf_3ShjR5cyCYRGRdM26nVnpCAqyvmLM-PhsXAj2n2VwzHVjhUs4azUIyn_SGTkpX0f-Q4ID38ouag',
       },
     ],
   },
@@ -73,19 +73,19 @@ export const players: Player[] = [
         gameName: 'koopy',
         tagLine: 'koopy',
         puuid:
-          'LneieauqsaYosym4Icybd9Skn24gQup2_kY0ZKn2Oknn5tCZhQZu0xkvbMTQ90_5NQoWHlaNvPGxvg',
+          'G604fcmJ7tNXnD4EkFqjvcbNHXMSTWLGx0pKYvjTiE_1-7k8QsNHM3D4jEMX0IgxWoRlGfNR8P4-fQ',
       },
       {
         gameName: 'koTeeFT',
         tagLine: 'NA1',
         puuid:
-          'K1r9-2bleSo6onh0qLzZgmQI7c837acuGKbVaCKzpEqEj02rTMYHAQGXpRMWvgcDrBb3mIFDDDQBCg',
+          '4YyvqFejb3UKJcRHjwt3oGGxCNlkOadqOsVwptC5Pk1cppPRXr17OAkjUDQnTJn9JZ1Ki8bFoIi9EQ',
       },
       {
         gameName: 'piss slit',
         tagLine: 'koopy',
         puuid:
-          'ko3Xj_V0evoGBQsJoJKrK3lHLSuAnweR2i8ybOD5QrOtCjseUeGN7JistIOs5qer_ugxivtlVbmCPw',
+          'f9XRsEIgIgwmhVpHTKmWBdF-T0I-Ulepvsh_yLwTwD_xdc1qZab3UVntzPjOydvFGT8ezunflizsyg',
       },
     ],
   },
@@ -97,13 +97,13 @@ export const players: Player[] = [
         gameName: 'TrianglePlant',
         tagLine: 'NA1',
         puuid:
-          'mk6C83RwJUfHKumcwvwmI7PLcbKUYiwxaFFlqXEb1n5k4Bcy9GRHy_Iry5hHEtepcbtu5zqKDknQLQ',
+          'rFBBSB5tORbjKBW0g1KXayq_8-BvRmPowqyjZAHBx86gE2MDv3be6oa_qEQC7cN_Gi13CK4zo5eUUg',
       },
       {
         gameName: 'P00CHYENA',
         tagLine: 'NA1',
         puuid:
-          'bcmCnr6Zj17I6pUSOe6Gk9ch7okajzZAjJ77PC25rqrkKYY9Q4PbhRFOHARSX-dt_FOKTds5gpruKg',
+          'P5sC7FWVEMy0TgGKA6yuBRNAc4fe8EGWwLf7T4astXPEefRpIXefV3896wVG9oGBG1QCNljHNKTVmA',
       },
     ],
   },
@@ -115,7 +115,7 @@ export const players: Player[] = [
         gameName: 'tyrese maxey',
         tagLine: 'pizza',
         puuid:
-          '7GD0hq8bTgdvCbCs4RWrFVbBQ6hWBbYoIji79oQ-KpVXEcoG11XX5KNPiL1T2m6qbxa4uBHIZRSrKg',
+          'TlP6cjc27eg-tVkU7dlA5MiymWdNAM3HDYECxMcmJx5srObPu5RTnrT6tQ4uWuOynu0fV3NB6m83Kw',
       },
     ],
   },
@@ -127,7 +127,7 @@ export const players: Player[] = [
         gameName: 'Magmacuber15',
         tagLine: 'NA1',
         puuid:
-          'XlEGwI7BcobACwWziizIZKKjwalhbsltWH5biSFkUu4XbGNbmb1KD_nD7LJZJU--sFU0ZgKIBFmHHg',
+          'hQnm0jPEHIO74o4Arm4_VLYoBLxw_KUrhFxYuwF_aMFPIQTHZtrsSaY_HPt9UUFIdpM8E_FIvI7Mcg',
       },
     ],
   },
@@ -139,7 +139,7 @@ export const players: Player[] = [
         gameName: 'nasty宝宝',
         tagLine: 'freak',
         puuid:
-          'WdN0X0BeUOWZ9M-VQU1NFgqGqVThi_PZCAqqfv0z8run3IJ2IX6fzp0s0XF1QzrAqR0tgxNqnx4paQ',
+          'L3VrYJpDZq5LQDUzJRtuG4Zuyk-JZczJsRnLI-VduxgU_dutjkc5xavMuTt6XBWpgRONkFQvqC6W9w',
       },
     ],
   },
@@ -152,7 +152,7 @@ export const players: Player[] = [
         gameName: 'ILLIT Minju',
         tagLine: 'ILLIT',
         puuid:
-          'nOv5IlgFTZSwSQM87XvJmmjcydU4ghJWWM2oAbgaAYHSJx3cW4895qnVhXoY8Qouv5CLSJP8hbEQYA',
+          '8YxZDA-o9bLARm-4PHuXuZn9fYcuOka7rWwbR1b_Zg8bQxsibmjjW5csce6nk6WzXvkN0GlRqxp3IA',
       },
     ],
   },
@@ -164,7 +164,7 @@ export const players: Player[] = [
         gameName: 'SavagePastaMan',
         tagLine: 'psvm',
         puuid:
-          'vuYOU6KqplCynhyAeZ_tSmxn3K8BeCW5cDFe4eN6eRPWbSya-X77aSFAYkOVRTmAYKH-cJj_c45lXg',
+          'l0QKyA5fChet5lVbiyyqmPTPjqnD51OOoap5XydDbL3X7VzV67uVbx-z858fcefOBUg-Y9UzVAMMfw',
       },
     ],
   },
@@ -176,7 +176,7 @@ export const players: Player[] = [
         gameName: 'matcha',
         tagLine: 'keshi',
         puuid:
-          'mxihkpBtHIPnysHK40R09ZYrxBo7EW5HjoyN8iYT_oqaVjblKUfTX2ErBKFKN9itfe6QBZV8CpM4hQ',
+          'XfwhDQP1AMJoQOK3l3quUfXl_FiJBtz-xYpke62DBQoPXt05Yzrh3sQ8MlyB5f82iLt8kP-VkgIXOg',
       },
     ],
   },
@@ -188,13 +188,13 @@ export const players: Player[] = [
         gameName: 'CodeMint',
         tagLine: 'NA1',
         puuid:
-          'NYI22wJWibkVUvGGSCQyxLKWVmwBKGEUIesMsF9emKxcqP9y9qSGjKdyJnwffXNqFIkmGVWWrLh8HA',
+          'l4M2-vzwyJliMlUR5V2_bUazuwLWBClPO7Zm1IhFaosGpgNaVBxev2Ea6cTsIHoM6FkXz1QV44A_ag',
       },
       {
         gameName: 'Crippled Chimp',
         tagLine: 'NA1',
         puuid:
-          'Ruuh0_iP6G1qa9qFlPUS7oZVavuM6OGNa5FaIkQi6u8KLEp5F9Z2kaXQDZHQNQiGxYIyMFNRWdo1kw',
+          '17QozPuO1gVaBCnOBbIhNjmgqAdn6xPYHG3geTDgW9SXgKY7xbWs1ZA0gddjxkHGd6TnQZy8gRNPIQ',
       },
     ],
   },
