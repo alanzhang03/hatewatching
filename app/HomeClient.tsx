@@ -118,8 +118,8 @@ export function HomeClient({
               <option value='default'>Default order</option>
               <option value='az'>Name A–Z</option>
               <option value='accounts'># of accounts</option>
-              <option value='soloRank'>Solo rank (highest first)</option>
-              <option value='flexRank'>Flex rank (highest first)</option>
+              <option value='soloRank'>Soloq rank (highest first)</option>
+              <option value='flexRank'>Flexq rank (highest first)</option>
             </select>
           </div>
           <span className={styles.resultCount}>
