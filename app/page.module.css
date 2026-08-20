@@ -179,11 +179,33 @@
   gap: 16px;
 }
 
+.profileHeader > div {
+  flex: 1;
+}
+
 .profileName {
   font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.6px;
   color: var(--text-primary);
+}
+
+.copyLinkButton {
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--foreground);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.copyLinkButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .avatar {

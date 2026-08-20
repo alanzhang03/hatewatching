@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { players } from '@/lib/players';
 import { PlayerAvatar } from '../PlayerAvatar';
 import { AccountRow } from '../AccountRow';
+import { CopyLinkButton } from '../CopyLinkButton';
 import styles from '../page.module.css';
 
 function findPlayer(id: string) {
@@ -41,6 +42,7 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
               {player.accounts.length === 1 ? '' : 's'}
             </p>
           </div>
+          <CopyLinkButton />
         </div>
 
         <ul className={styles.accounts}>
