@@ -247,7 +247,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 20px;
   padding: 10px 12px;
   background: var(--row-bg);
   border-radius: 10px;
@@ -389,9 +389,53 @@
   font-weight: 600;
 }
 
+.linkChipOpgg {
+  border-color: #5c7793;
+  background: #6fa0cc12;
+  color: #76adda;
+}
+
+.linkChipUgg {
+  border-color: #5c6c8c;
+  background: #5b7ab812;
+  color: #93a1c0;
+}
+
+.linkChipDeeplol {
+  border-color: #5c8770;
+  background: #4ea86f12;
+  color: #8fbaa1;
+}
+
+.linkChipPorofessor {
+  border-color: #93803f;
+  background: #c2a03a12;
+  color: #c2ac6e;
+}
+
 .linkChip:hover {
   background: var(--chip-hover);
   color: var(--accent);
+}
+
+.linkChipOpgg:hover {
+  background: #6fa0cc22;
+  color: #89a9c4;
+}
+
+.linkChipUgg:hover {
+  background: #5b7ab822;
+  color: #93a1c0;
+}
+
+.linkChipDeeplol:hover {
+  background: #4ea86f22;
+  color: #8fbaa1;
+}
+
+.linkChipPorofessor:hover {
+  background: #c2a03a22;
+  color: #c2ac6e;
 }
 
 .readMore {

@@ -76,7 +76,7 @@ export function AccountRow({
       </div>
       <span className={styles.linkGroup}>
         <a
-          className={styles.linkChip}
+          className={`${styles.linkChip} ${styles.linkChipOpgg}`}
           href={opggUrl(account)}
           target='_blank'
           rel='noopener noreferrer'
@@ -84,7 +84,7 @@ export function AccountRow({
           op.gg
         </a>
         <a
-          className={styles.linkChip}
+          className={`${styles.linkChip} ${styles.linkChipUgg}`}
           href={uggUrl(account)}
           target='_blank'
           rel='noopener noreferrer'
@@ -92,7 +92,7 @@ export function AccountRow({
           u.gg
         </a>
         <a
-          className={styles.linkChip}
+          className={`${styles.linkChip} ${styles.linkChipDeeplol}`}
           href={deepLolUrl(account)}
           target='_blank'
           rel='noopener noreferrer'
@@ -100,7 +100,7 @@ export function AccountRow({
           deeplol
         </a>
         <a
-          className={styles.linkChip}
+          className={`${styles.linkChip} ${styles.linkChipPorofessor}`}
           href={porofessorUrl(account)}
           target='_blank'
           rel='noopener noreferrer'
