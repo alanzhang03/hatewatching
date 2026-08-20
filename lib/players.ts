@@ -198,4 +198,28 @@ export const players: Player[] = [
       },
     ],
   },
+  {
+    id: 'Pan',
+    displayName: 'Pan',
+    accounts: [
+      {
+        gameName: 'Ninjasafd',
+        tagLine: 'NA1',
+        puuid:
+          '2i30zRQZORDoYOjG-noMe1DERISTF2avLJQ2mOqUJOqDSvT7XE9rtZZEjc9xvhC8h-6Q4vWHvbIxxA',
+      },
+    ],
+  },
+  {
+    id: '101',
+    displayName: '101',
+    accounts: [
+      {
+        gameName: '101',
+        tagLine: '00404',
+        puuid:
+          '7QBDK0GH5dLFODiMTd-z-1jqHmu4kBVOP9p2SNMYOCF2gWAbzQ69852o-A8ZKshUN9ksxX8Qm4YRxQ',
+      },
+    ],
+  },
 ];
