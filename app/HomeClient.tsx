@@ -101,6 +101,15 @@ export function HomeClient({
           <p className={styles.subtitle}>
             {players.length} players &middot;{' '}
             {players.reduce((sum, p) => sum + p.accounts.length, 0)} accounts
+            {' · '}
+            <a
+              href='https://savagepastaman.com/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className={styles.playerExtraLink}
+            >
+              SOLO Q BET LINK
+            </a>
           </p>
         </header>
 

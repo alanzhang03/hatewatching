@@ -52,6 +52,15 @@
   color: var(--text-secondary);
 }
 
+.playerExtraLink {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.playerExtraLink:hover {
+  text-decoration: underline;
+}
+
 .controls {
   display: flex;
   flex-wrap: wrap;
