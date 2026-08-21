@@ -116,10 +116,10 @@ export function HomeClient({
               onChange={(e) => setSortMode(e.target.value as SortMode)}
             >
               <option value='default'>Default order</option>
-              <option value='az'>Name A–Z</option>
-              <option value='accounts'># of accounts</option>
               <option value='soloRank'>Soloq rank (highest first)</option>
               <option value='flexRank'>Flexq rank (highest first)</option>
+              <option value='az'>Name A–Z</option>
+              <option value='accounts'># of accounts</option>
             </select>
           </div>
           <span className={styles.resultCount}>
