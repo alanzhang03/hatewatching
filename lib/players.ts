@@ -57,6 +57,12 @@ export const players: Player[] = [
         puuid:
           'Mc8YuFovLPIMukg4Tv--EToIU_Vlh0Q70AljpxcMLYD0TQflFzbtIOROzx9fRG1aTSO4yE0FNhPupg',
       },
+      {
+        gameName: 'Snafyou',
+        tagLine: 'NA1',
+        puuid:
+          'vcp7DypLeToqQEpMyZxA_DjTyvKcQeceII5y0c5XHpaX1JafBup5d-XETjyvVj4gmzk0mw5dEGOs7w',
+      },
     ],
   },
   {
