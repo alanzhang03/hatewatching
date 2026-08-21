@@ -12,10 +12,13 @@ const VISIBLE_COUNT = 2;
 export function PlayerCard({
   player,
   ranks,
+  icons,
 }: {
   player: Player;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ranks: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icons: any[];
 }) {
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
@@ -37,11 +40,13 @@ export function PlayerCard({
       <ul className={styles.accounts} onClick={(e) => e.stopPropagation()}>
         {visibleAccounts.map((account) => {
           const rankEntry = ranks.find((r) => r.userName === account.gameName);
+          const iconEntry = icons.find((i) => i.userName === account.gameName);
           return (
             <AccountRow
               key={`${account.gameName}-${account.tagLine}`}
               account={account}
               rank={rankEntry?.rank}
+              iconUrl={iconEntry?.iconUrl}
             />
           );
         })}

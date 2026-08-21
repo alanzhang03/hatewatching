@@ -46,15 +46,29 @@ function queueRankLabel(entry: any, prefix: string) {
 export function AccountRow({
   account,
   rank,
+  iconUrl,
 }: {
   account: LolAccount;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   rank?: any[];
+  iconUrl?: string;
 }) {
   return (
     <li>
       <div className={styles.riotIdRow}>
-        <CopyRiotId gameName={account.gameName} tagLine={account.tagLine} />
+        <span className={styles.riotIdWithIcon}>
+          {iconUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={iconUrl}
+              alt=""
+              className={styles.summonerIcon}
+              width={20}
+              height={20}
+            />
+          )}
+          <CopyRiotId gameName={account.gameName} tagLine={account.tagLine} />
+        </span>
         {rank && (
           <span className={styles.rankBadgeGroup}>
             {QUEUES.map(({ type, label }) => {

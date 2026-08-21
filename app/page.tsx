@@ -1,8 +1,8 @@
 import { players } from '@/lib/players';
-import { getRanks } from '@/lib/riot';
+import { getRanks, getSummonerIcons } from '@/lib/riot';
 import { HomeClient } from './HomeClient';
 
 export default async function Home() {
-  const ranks = await getRanks();
-  return <HomeClient players={players} ranks={ranks} />;
+  const [ranks, icons] = await Promise.all([getRanks(), getSummonerIcons()]);
+  return <HomeClient players={players} ranks={ranks} icons={icons} />;
 }

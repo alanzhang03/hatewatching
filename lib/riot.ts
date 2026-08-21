@@ -65,6 +65,41 @@ export async function getRanks() {
   return ranks;
 }
 
+async function getLatestDataDragonVersion() {
+  const res = await fetch(
+    'https://ddragon.leagueoflegends.com/api/versions.json',
+    { next: { revalidate: 86400 } },
+  );
+  const versions = await res.json();
+  return versions[0];
+}
+
+export async function getSummonerIcons() {
+  const version = await getLatestDataDragonVersion();
+  const icons = [];
+
+  for (const discordUser of players) {
+    for (const account of discordUser.accounts) {
+      const url = `${PLATFORM_BASE_URL}/lol/summoner/v4/summoners/by-puuid/${account.puuid}`;
+      const userName = account.gameName;
+      try {
+        const data = await riotFetch(url, 86400);
+        if (data) {
+          const iconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${data.profileIconId}.png`;
+          icons.push({ userName, iconUrl });
+        }
+      } catch (err) {
+        console.error(
+          `Error fetching summoner icon for ${account.gameName}#${account.tagLine}:`,
+          err,
+        );
+      }
+    }
+  }
+
+  return icons;
+}
+
 export async function getMatchHistoryIDs(puuid: string) {
   let matchHistory;
   try {

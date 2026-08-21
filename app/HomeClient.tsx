@@ -47,10 +47,13 @@ function bestRankScore(player: Player, ranks: any[], queueType: string) {
 export function HomeClient({
   players,
   ranks,
+  icons,
 }: {
   players: Player[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ranks: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  icons: any[];
 }) {
   const [query, setQuery] = useState('');
   const [sortMode, setSortMode] = useState<SortMode>('default');
@@ -134,7 +137,12 @@ export function HomeClient({
         ) : (
           <div className={styles.players}>
             {filteredPlayers.map((player) => (
-              <PlayerCard key={player.id} player={player} ranks={ranks} />
+              <PlayerCard
+                key={player.id}
+                player={player}
+                ranks={ranks}
+                icons={icons}
+              />
             ))}
           </div>
         )}
