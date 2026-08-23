@@ -74,26 +74,25 @@ async function getLatestDataDragonVersion() {
   return versions[0];
 }
 
-export async function getSummonerIcons() {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getSummonerIcons(accounts: any[]) {
   const version = await getLatestDataDragonVersion();
   const icons = [];
 
-  for (const discordUser of players) {
-    for (const account of discordUser.accounts) {
-      const url = `${PLATFORM_BASE_URL}/lol/summoner/v4/summoners/by-puuid/${account.puuid}`;
-      const userName = account.gameName;
-      try {
-        const data = await riotFetch(url, 86400);
-        if (data) {
-          const iconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${data.profileIconId}.png`;
-          icons.push({ userName, iconUrl });
-        }
-      } catch (err) {
-        console.error(
-          `Error fetching summoner icon for ${account.gameName}#${account.tagLine}:`,
-          err,
-        );
+  for (const account of accounts) {
+    const url = `${PLATFORM_BASE_URL}/lol/summoner/v4/summoners/by-puuid/${account.puuid}`;
+    const userName = account.gameName;
+    try {
+      const data = await riotFetch(url, 86400);
+      if (data) {
+        const iconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${data.profileIconId}.png`;
+        icons.push({ userName, iconUrl });
       }
+    } catch (err) {
+      console.error(
+        `Error fetching summoner icon for ${account.gameName}#${account.tagLine}:`,
+        err,
+      );
     }
   }
 

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { players } from '@/lib/players';
+import { getSummonerIcons } from '@/lib/riot';
 import { PlayerAvatar } from '../PlayerAvatar';
 import { AccountRow } from '../AccountRow';
 import { CopyLinkButton } from '../CopyLinkButton';
@@ -28,6 +29,8 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
 
   if (!player) notFound();
 
+  const icons = await getSummonerIcons(player.accounts);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -48,9 +51,16 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
         </div>
 
         <ul className={styles.accounts}>
-          {player.accounts.map((account) => (
-            <AccountRow key={`${account.gameName}-${account.tagLine}`} account={account} />
-          ))}
+          {player.accounts.map((account) => {
+            const iconEntry = icons.find((i) => i.userName === account.gameName);
+            return (
+              <AccountRow
+                key={`${account.gameName}-${account.tagLine}`}
+                account={account}
+                iconUrl={iconEntry?.iconUrl}
+              />
+            );
+          })}
           {player.accounts.length === 0 && (
             <li className={styles.empty}>no accounts yet</li>
           )}
@@ -58,7 +68,7 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
 
         <h2 className={styles.sectionHeading}>Recent Matches</h2>
         <Suspense fallback={<p className={styles.empty}>Loading matches...</p>}>
-          <MatchHistory accounts={player.accounts} />
+          <MatchHistory accounts={player.accounts} icons={icons} />
         </Suspense>
       </main>
     </div>
