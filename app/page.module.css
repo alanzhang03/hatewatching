@@ -12,7 +12,8 @@
   --chip-hover: #ececf9;
   --row-bg: #f1f2f5;
   --shadow: 0 1px 2px rgba(16, 16, 20, 0.04), 0 8px 24px rgba(16, 16, 20, 0.04);
-  --shadow-hover: 0 4px 8px rgba(16, 16, 20, 0.08), 0 16px 32px rgba(16, 16, 20, 0.1);
+  --shadow-hover:
+    0 4px 8px rgba(16, 16, 20, 0.08), 0 16px 32px rgba(16, 16, 20, 0.1);
 
   display: flex;
   flex: 1;
@@ -59,6 +60,12 @@
 
 .playerExtraLink:hover {
   text-decoration: underline;
+}
+
+.filterBar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .controls {
@@ -126,6 +133,48 @@
   outline: none;
   border-color: var(--accent);
   color: var(--text-primary);
+}
+
+.nameBubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nameBubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--foreground);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.nameBubbleAll {
+  padding: 5px 14px;
+}
+
+.nameBubble:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.nameBubbleActive {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
 }
 
 .noResults {
@@ -603,6 +652,7 @@
     --chip-hover: #24243a;
     --row-bg: #1c1c1f;
     --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
-    --shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3);
+    --shadow-hover:
+      0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3);
   }
 }

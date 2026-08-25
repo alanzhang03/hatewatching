@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import styles from './page.module.css';
 import type { Player } from '@/lib/players';
 import { PlayerCard } from './PlayerCard';
+import { PlayerAvatar } from './PlayerAvatar';
 
 type SortMode = 'default' | 'az' | 'accounts' | 'soloRank' | 'flexRank';
 
@@ -57,12 +58,21 @@ export function HomeClient({
 }) {
   const [query, setQuery] = useState('');
   const [sortMode, setSortMode] = useState<SortMode>('default');
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const toggleSelected = (id: string) =>
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((v) => v !== id) : [...prev, id],
+    );
 
   const filteredPlayers = useMemo(() => {
     const q = query.trim().toLowerCase();
     let result = players;
+    if (selectedIds.length > 0) {
+      result = result.filter((player) => selectedIds.includes(player.id));
+    }
     if (q) {
-      result = players.filter((player) => {
+      result = result.filter((player) => {
         if (player.displayName.toLowerCase().includes(q)) return true;
         return player.accounts.some((account) =>
           `${account.gameName}#${account.tagLine}`.toLowerCase().includes(q),
@@ -91,7 +101,7 @@ export function HomeClient({
       );
     }
     return result;
-  }, [query, sortMode, players, ranks]);
+  }, [query, sortMode, selectedIds, players, ranks]);
 
   return (
     <div className={styles.page}>
@@ -113,35 +123,72 @@ export function HomeClient({
           </p>
         </header>
 
-        <div className={styles.controls}>
-          <div className={styles.controlsLeft}>
-            <input
-              type='text'
-              className={styles.search}
-              placeholder='Search by name/account name...'
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <select
-              className={styles.sortSelect}
-              value={sortMode}
-              onChange={(e) => setSortMode(e.target.value as SortMode)}
-            >
-              <option value='default'>Default order</option>
-              <option value='soloRank'>Soloq rank (highest first)</option>
-              <option value='flexRank'>Flexq rank (highest first)</option>
-              <option value='az'>Name A–Z</option>
-              <option value='accounts'># of accounts</option>
-            </select>
+        <div className={styles.filterBar}>
+          <div className={styles.controls}>
+            <div className={styles.controlsLeft}>
+              <input
+                type='text'
+                className={styles.search}
+                placeholder='Search by name/account name...'
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <select
+                className={styles.sortSelect}
+                value={sortMode}
+                onChange={(e) => setSortMode(e.target.value as SortMode)}
+              >
+                <option value='default'>Default order</option>
+                <option value='soloRank'>Soloq rank (highest first)</option>
+                <option value='flexRank'>Flexq rank (highest first)</option>
+                <option value='az'>Name A–Z</option>
+                <option value='accounts'># of accounts</option>
+              </select>
+            </div>
+            <span className={styles.resultCount}>
+              Showing {filteredPlayers.length} of {players.length}
+            </span>
           </div>
-          <span className={styles.resultCount}>
-            Showing {filteredPlayers.length} of {players.length}
-          </span>
+
+          <div className={styles.nameBubbles}>
+            <button
+              type='button'
+              className={`${styles.nameBubble} ${styles.nameBubbleAll} ${
+                selectedIds.length === 0 ? styles.nameBubbleActive : ''
+              }`}
+              onClick={() => setSelectedIds([])}
+            >
+              Everyone
+            </button>
+            {players.map((player) => {
+              const active = selectedIds.includes(player.id);
+              return (
+                <button
+                  key={player.id}
+                  type='button'
+                  className={`${styles.nameBubble} ${
+                    active ? styles.nameBubbleActive : ''
+                  }`}
+                  aria-pressed={active}
+                  onClick={() => toggleSelected(player.id)}
+                >
+                  <PlayerAvatar
+                    id={player.id}
+                    displayName={player.displayName}
+                    size={20}
+                  />
+                  {player.displayName}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {filteredPlayers.length === 0 ? (
           <p className={styles.noResults}>
-            No matches for &ldquo;{query}&rdquo;
+            {query.trim()
+              ? `No matches for \u201C${query}\u201D`
+              : 'No matches for the selected names'}
           </p>
         ) : (
           <div className={styles.players}>
