@@ -8,7 +8,7 @@ export function CopyLinkButton() {
 
   return (
     <button
-      type="button"
+      type='button'
       className={styles.copyLinkButton}
       onClick={async () => {
         await navigator.clipboard.writeText(window.location.href);
