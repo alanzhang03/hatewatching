@@ -6,6 +6,7 @@ import { getSummonerIcons } from '@/lib/riot';
 import { PlayerAvatar } from '../PlayerAvatar';
 import { AccountRow } from '../AccountRow';
 import { CopyLinkButton } from '../CopyLinkButton';
+import { ThemeToggle } from '../ThemeToggle';
 import { MatchHistory } from './MatchHistory';
 import styles from '../page.module.css';
 
@@ -20,7 +21,9 @@ export function generateStaticParams() {
 export async function generateMetadata(props: PageProps<'/[id]'>) {
   const { id } = await props.params;
   const player = findPlayer(id);
-  return { title: player ? `${player.displayName} · chogwarts accounts` : 'Not found' };
+  return {
+    title: player ? `${player.displayName} · chogwarts accounts` : 'Not found',
+  };
 }
 
 export default async function PlayerPage(props: PageProps<'/[id]'>) {
@@ -34,12 +37,16 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Link href="/" className={styles.backLink}>
+        <Link href='/' className={styles.backLink}>
           &larr; All accounts
         </Link>
 
         <div className={styles.profileHeader}>
-          <PlayerAvatar id={player.id} displayName={player.displayName} size={64} />
+          <PlayerAvatar
+            id={player.id}
+            displayName={player.displayName}
+            size={64}
+          />
           <div>
             <h1 className={styles.profileName}>{player.displayName}</h1>
             <p className={styles.subtitle}>
@@ -48,11 +55,14 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
             </p>
           </div>
           <CopyLinkButton />
+          <ThemeToggle />
         </div>
 
         <ul className={styles.accounts}>
           {player.accounts.map((account) => {
-            const iconEntry = icons.find((i) => i.userName === account.gameName);
+            const iconEntry = icons.find(
+              (i) => i.userName === account.gameName,
+            );
             return (
               <AccountRow
                 key={`${account.gameName}-${account.tagLine}`}
