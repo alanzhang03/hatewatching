@@ -639,20 +639,46 @@
 
 @media (prefers-color-scheme: dark) {
   .page {
-    --background: #0a0a0b;
-    --foreground: #151517;
+    --background: #141619;
+    --foreground: #1e2128;
 
-    --text-primary: #ededed;
-    --text-secondary: #9ca0a8;
-    --text-tertiary: #6b6f76;
-    --border: #232326;
-    --accent: #8b8ff9;
-    --accent-soft: #211f3d;
-    --chip-bg: #1c1c1f;
-    --chip-hover: #24243a;
-    --row-bg: #1c1c1f;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+    --text-primary: #d8dbe2;
+    --text-secondary: #a2a9b6;
+    --text-tertiary: #7b818e;
+    --border: #333845;
+    --accent: #9599fa;
+    --accent-soft: #2a2c4b;
+    --chip-bg: #272b34;
+    --chip-hover: #33374a;
+    --row-bg: #272b34;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.18);
     --shadow-hover:
-      0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.3);
+      0 4px 8px rgba(0, 0, 0, 0.32), 0 16px 32px rgba(0, 0, 0, 0.24);
+  }
+
+  /* These tier colors were picked against the light theme and drop below
+     3:1 on the lighter dark surfaces; brighten them, keeping their hue. */
+  .rankIron {
+    border-color: #9a9797;
+    background: #9a979722;
+    color: #9a9797;
+  }
+
+  .rankDiamond {
+    border-color: #6d94e8;
+    background: #6d94e822;
+    color: #6d94e8;
+  }
+
+  .rankMaster {
+    border-color: #e06ab0;
+    background: #e06ab022;
+    color: #e06ab0;
+  }
+
+  .rankGrandmaster {
+    border-color: #ef6b6b;
+    background: #ef6b6b22;
+    color: #ef6b6b;
   }
 }
