@@ -26,7 +26,7 @@ export function PlayerAvatar({
 
   return (
     <Image
-      src={`/pfp/${id.toLowerCase()}.png`}
+      src={`/pfp/${id.toLowerCase()}.webp`}
       alt={displayName}
       width={size}
       height={size}
