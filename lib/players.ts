@@ -246,4 +246,16 @@ export const players: Player[] = [
       },
     ],
   },
+  {
+    id: 'jas',
+    displayName: 'jas',
+    accounts: [
+      {
+        gameName: 'jas',
+        tagLine: 'qaq',
+        puuid:
+          'DM8z0YmUzjjgxzX6MJMy7XqPiZ1vgtYoslIf5yKo8v9RNP0aQxVRgrQjWiFIB_mCODdbrKEPugphcg',
+      },
+    ],
+  },
 ];
