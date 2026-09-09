@@ -1,3 +1,4 @@
+import { unstable_cache } from 'next/cache';
 import { players } from './players';
 import type { LolAccount } from './players';
 
@@ -6,11 +7,18 @@ const RIOT_API_TOKEN = process.env.RIOT_API_KEY;
 const REGIONAL_BASE_URL = 'https://americas.api.riotgames.com';
 const PLATFORM_BASE_URL = 'https://na1.api.riotgames.com';
 
+const RIOT_CACHE_REVALIDATE = 300;
+
 type RiotFetchResult = {
   ok: boolean;
   rateLimited: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
+};
+
+type RankAccount = {
+  gameName: string;
+  puuid: string;
 };
 
 async function riotFetch(url: string, revalidate = 600): Promise<RiotFetchResult> {
@@ -58,17 +66,17 @@ export async function fetchPlayerPuuid() {
   return results;
 }
 
-async function getRanksForAccountList(accounts: LolAccount[]) {
+async function fetchRanksForAccounts(accounts: RankAccount[]) {
   const ranks = [];
   for (const account of accounts) {
     const url = `${PLATFORM_BASE_URL}/lol/league/v4/entries/by-puuid/${account.puuid}`;
     const userName = account.gameName;
     try {
-      const result = await riotFetch(url);
+      const result = await riotFetch(url, RIOT_CACHE_REVALIDATE);
       if (result.data) ranks.push({ userName, rank: result.data });
     } catch (err) {
       console.error(
-        `Error fetching ranks for ${account.gameName}#${account.tagLine}:`,
+        `Error fetching ranks for ${account.gameName}:`,
         err,
       );
     }
@@ -76,13 +84,58 @@ async function getRanksForAccountList(accounts: LolAccount[]) {
   return ranks;
 }
 
+const getCachedRanks = unstable_cache(
+  async (puuidKey: string, serializedAccounts: string) => {
+    void puuidKey;
+    const accounts = JSON.parse(serializedAccounts) as RankAccount[];
+    return fetchRanksForAccounts(accounts);
+  },
+  ['riot-ranks'],
+  { revalidate: RIOT_CACHE_REVALIDATE },
+);
+
+function rankCacheArgs(accounts: LolAccount[]) {
+  const sorted = [...accounts].sort((a, b) => a.puuid.localeCompare(b.puuid));
+  const puuidKey = sorted.map((account) => account.puuid).join('|');
+  const serializedAccounts = JSON.stringify(
+    sorted.map((account) => ({
+      gameName: account.gameName,
+      puuid: account.puuid,
+    })),
+  );
+  return { puuidKey, serializedAccounts };
+}
+
+function isMissingIncrementalCacheError(err: unknown) {
+  return (
+    err instanceof Error &&
+    err.message.includes('incrementalCache missing in unstable_cache')
+  );
+}
+
 export async function getRanks() {
   const accounts = players.flatMap((player) => player.accounts);
-  return getRanksForAccountList(accounts);
+  const { puuidKey, serializedAccounts } = rankCacheArgs(accounts);
+  try {
+    return await getCachedRanks(puuidKey, serializedAccounts);
+  } catch (err) {
+    if (isMissingIncrementalCacheError(err)) {
+      return fetchRanksForAccounts(JSON.parse(serializedAccounts));
+    }
+    throw err;
+  }
 }
 
 export async function getRanksForAccounts(accounts: LolAccount[]) {
-  return getRanksForAccountList(accounts);
+  const { puuidKey, serializedAccounts } = rankCacheArgs(accounts);
+  try {
+    return await getCachedRanks(puuidKey, serializedAccounts);
+  } catch (err) {
+    if (isMissingIncrementalCacheError(err)) {
+      return fetchRanksForAccounts(JSON.parse(serializedAccounts));
+    }
+    throw err;
+  }
 }
 
 export async function getLatestDataDragonVersion() {
@@ -140,7 +193,7 @@ export async function getMatchHistoryIDs(
 
     const result = await riotFetch(
       `${REGIONAL_BASE_URL}/lol/match/v5/matches/by-puuid/${puuid}/ids?${params}`,
-      300,
+      RIOT_CACHE_REVALIDATE,
     );
     return result;
   } catch (err) {
@@ -169,10 +222,30 @@ export type MatchHistoryResult = {
   failed: boolean;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getPlayerMatchHistory(
-  accounts: any[],
-  options?: { count?: number; queue?: number; startTime?: number },
+type MatchHistoryAccount = {
+  gameName: string;
+  tagLine: string;
+  puuid: string;
+};
+
+type MatchHistoryOptions = {
+  count?: number;
+  queue?: number;
+  startTime?: number;
+};
+
+class MatchHistoryCacheBypassError extends Error {
+  result: MatchHistoryResult;
+
+  constructor(result: MatchHistoryResult) {
+    super('riot-match-history-cache-bypass');
+    this.result = result;
+  }
+}
+
+async function fetchPlayerMatchHistoryUncached(
+  accounts: MatchHistoryAccount[],
+  options?: MatchHistoryOptions,
 ): Promise<MatchHistoryResult> {
   const matches = [];
   let rateLimited = false;
@@ -206,4 +279,69 @@ export async function getPlayerMatchHistory(
   }
 
   return { matches, rateLimited, failed };
+}
+
+const getCachedPlayerMatchHistory = unstable_cache(
+  async (cacheKey: string, serializedAccounts: string, serializedOptions: string) => {
+    void cacheKey;
+    const accounts = JSON.parse(serializedAccounts) as MatchHistoryAccount[];
+    const options = JSON.parse(serializedOptions) as MatchHistoryOptions;
+    const result = await fetchPlayerMatchHistoryUncached(accounts, options);
+
+    if ((result.rateLimited || result.failed) && result.matches.length === 0) {
+      throw new MatchHistoryCacheBypassError(result);
+    }
+
+    return result;
+  },
+  ['riot-match-history'],
+  { revalidate: RIOT_CACHE_REVALIDATE },
+);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getPlayerMatchHistory(
+  accounts: any[],
+  options?: MatchHistoryOptions,
+): Promise<MatchHistoryResult> {
+  const sorted = [...accounts].sort((a, b) =>
+    String(a.puuid).localeCompare(String(b.puuid)),
+  );
+  const puuidKey = sorted.map((account) => account.puuid).join('|');
+  const optionsKey = JSON.stringify({
+    count: options?.count ?? 5,
+    queue: options?.queue ?? null,
+    startTime: options?.startTime ?? null,
+  });
+  const cacheKey = `${puuidKey}::${optionsKey}`;
+  const serializedAccounts = JSON.stringify(
+    sorted.map((account) => ({
+      gameName: account.gameName,
+      tagLine: account.tagLine,
+      puuid: account.puuid,
+    })),
+  );
+
+  try {
+    return await getCachedPlayerMatchHistory(
+      cacheKey,
+      serializedAccounts,
+      optionsKey,
+    );
+  } catch (err) {
+    if (
+      err instanceof MatchHistoryCacheBypassError ||
+      (err instanceof Error &&
+        err.message === 'riot-match-history-cache-bypass' &&
+        'result' in err)
+    ) {
+      return (err as MatchHistoryCacheBypassError).result;
+    }
+    if (isMissingIncrementalCacheError(err)) {
+      return fetchPlayerMatchHistoryUncached(
+        JSON.parse(serializedAccounts),
+        JSON.parse(optionsKey),
+      );
+    }
+    throw err;
+  }
 }
