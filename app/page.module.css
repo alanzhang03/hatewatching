@@ -866,6 +866,31 @@
   list-style: none;
 }
 
+.betMatchSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.betMatchFilters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.betMatchFilterCount {
+  margin-left: 2px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.nameBubbleActive .betMatchFilterCount {
+  color: inherit;
+  opacity: 0.75;
+}
+
 .betMatchItem {
   border-radius: 12px;
   border-left: 3px solid var(--border);
