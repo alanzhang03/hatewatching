@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { players } from '@/lib/players';
-import { getRanks, getSummonerIcons } from '@/lib/riot';
+import { getRanksForAccounts, getSummonerIcons } from '@/lib/riot';
 import { SOLOQ_BET } from '@/lib/soloq-bet';
 import { SiteNav } from '../SiteNav';
 import { ContestantCard, soloRankScore } from './ContestantCard';
@@ -41,7 +41,7 @@ export default async function SoloqBetPage() {
 
   const accounts = contestants.flatMap((c) => c.player.accounts);
   const [ranks, icons] = await Promise.all([
-    getRanks(),
+    getRanksForAccounts(accounts),
     getSummonerIcons(accounts),
   ]);
 

@@ -99,8 +99,6 @@ function bestSoloLabel(player: Player, ranks: any[]) {
   };
 }
 
-// Count games/WR from the highest-ranked Solo account only (start caps
-// were recorded per main, not summed across alts).
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function soloRecord(player: Player, ranks: any[]) {
   const solo = primarySoloEntry(player, ranks);

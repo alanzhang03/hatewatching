@@ -38,7 +38,7 @@ export async function MatchHistory({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icons: any[];
 }) {
-  const matches = await getPlayerMatchHistory(accounts);
+  const { matches, rateLimited, failed } = await getPlayerMatchHistory(accounts);
   const playerPuuids = accounts.map((a) => a.puuid);
 
   const sorted = [...matches].sort(
@@ -46,6 +46,20 @@ export async function MatchHistory({
   );
 
   if (sorted.length === 0) {
+    if (rateLimited) {
+      return (
+        <p className={styles.empty}>
+          Riot API rate limit hit — try again in a minute or two.
+        </p>
+      );
+    }
+    if (failed) {
+      return (
+        <p className={styles.empty}>
+          Couldn’t load match history from Riot. Refresh and try again.
+        </p>
+      );
+    }
     return <p className={styles.empty}>No recent matches found.</p>;
   }
 

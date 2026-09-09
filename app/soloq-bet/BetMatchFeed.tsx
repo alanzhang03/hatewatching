@@ -1,4 +1,8 @@
-import { getLatestDataDragonVersion, getPlayerMatchHistory } from '@/lib/riot';
+import {
+  getLatestDataDragonVersion,
+  getPlayerMatchHistory,
+  weekAgoStartTimeSeconds,
+} from '@/lib/riot';
 import type { LolAccount, Player } from '@/lib/players';
 import { opggUrl } from '@/lib/links';
 import { BetMatchList } from './BetMatchList';
@@ -88,14 +92,15 @@ export async function BetMatchFeed({
 }) {
   const weekAgoMs = Date.now() - 7 * 24 * 60 * 60 * 1000;
   const accounts = contestants.flatMap((p) => p.accounts);
-  const [matches, version] = await Promise.all([
+  const [history, version] = await Promise.all([
     getPlayerMatchHistory(accounts, {
       count: 100,
       queue: 420,
-      startTime: Math.floor(weekAgoMs / 1000),
+      startTime: weekAgoStartTimeSeconds(),
     }),
     getLatestDataDragonVersion(),
   ]);
+  const { matches, rateLimited, failed } = history;
 
   const puuidToPlayer = new Map<string, Player>();
   const puuidToAccount = new Map<string, LolAccount>();
@@ -129,6 +134,20 @@ export async function BetMatchFeed({
   );
 
   if (sorted.length === 0) {
+    if (rateLimited) {
+      return (
+        <p className={styles.empty}>
+          Riot API rate limit hit — try again in a minute or two.
+        </p>
+      );
+    }
+    if (failed) {
+      return (
+        <p className={styles.empty}>
+          Couldn’t load match history from Riot. Refresh and try again.
+        </p>
+      );
+    }
     return (
       <p className={styles.empty}>No ranked solo matches in the last 7 days.</p>
     );
@@ -142,7 +161,6 @@ export async function BetMatchFeed({
     );
     if (contestantsInMatch.length === 0) continue;
 
-    // Summary row uses the first contestant; scoreboard highlights all of them.
     const me = contestantsInMatch[0] as {
       puuid: string;
       teamId: number;

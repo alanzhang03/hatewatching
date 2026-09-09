@@ -1,11 +1,19 @@
 import { players } from './players';
+import type { LolAccount } from './players';
 
 const RIOT_API_TOKEN = process.env.RIOT_API_KEY;
 
 const REGIONAL_BASE_URL = 'https://americas.api.riotgames.com';
 const PLATFORM_BASE_URL = 'https://na1.api.riotgames.com';
 
-async function riotFetch(url: string, revalidate = 600) {
+type RiotFetchResult = {
+  ok: boolean;
+  rateLimited: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
+};
+
+async function riotFetch(url: string, revalidate = 600): Promise<RiotFetchResult> {
   if (!RIOT_API_TOKEN) {
     throw new Error('RIOT_API_KEY is not set');
   }
@@ -15,12 +23,17 @@ async function riotFetch(url: string, revalidate = 600) {
     next: { revalidate },
   });
 
-  if (!res.ok) {
-    console.error(`Riot API request failed (${res.status}): ${url}`);
-    return null;
+  if (res.status === 429) {
+    console.error(`Riot API rate limited (429): ${url}`);
+    return { ok: false, rateLimited: true, data: null };
   }
 
-  return await res.json();
+  if (!res.ok) {
+    console.error(`Riot API request failed (${res.status}): ${url}`);
+    return { ok: false, rateLimited: false, data: null };
+  }
+
+  return { ok: true, rateLimited: false, data: await res.json() };
 }
 
 export async function fetchPlayerPuuid() {
@@ -31,8 +44,8 @@ export async function fetchPlayerPuuid() {
       const url = `${REGIONAL_BASE_URL}/riot/account/v1/accounts/by-riot-id/${encodeURIComponent(account.gameName)}/${encodeURIComponent(account.tagLine)}`;
 
       try {
-        const data = await riotFetch(url);
-        if (data) results.push(data);
+        const result = await riotFetch(url);
+        if (result.data) results.push(result.data);
       } catch (err) {
         console.error(
           `Error fetching puuid for ${account.gameName}#${account.tagLine}:`,
@@ -45,24 +58,31 @@ export async function fetchPlayerPuuid() {
   return results;
 }
 
-export async function getRanks() {
-  let ranks = [];
-  for (const discordUser of players) {
-    for (const account of discordUser.accounts) {
-      const url = `${PLATFORM_BASE_URL}/lol/league/v4/entries/by-puuid/${account.puuid}`;
-      const userName = account.gameName;
-      try {
-        const data = await riotFetch(url);
-        if (data) ranks.push({ userName, rank: data });
-      } catch (err) {
-        console.error(
-          `Error fetching puuid for ${account.gameName}#${account.tagLine}:`,
-          err,
-        );
-      }
+async function getRanksForAccountList(accounts: LolAccount[]) {
+  const ranks = [];
+  for (const account of accounts) {
+    const url = `${PLATFORM_BASE_URL}/lol/league/v4/entries/by-puuid/${account.puuid}`;
+    const userName = account.gameName;
+    try {
+      const result = await riotFetch(url);
+      if (result.data) ranks.push({ userName, rank: result.data });
+    } catch (err) {
+      console.error(
+        `Error fetching ranks for ${account.gameName}#${account.tagLine}:`,
+        err,
+      );
     }
   }
   return ranks;
+}
+
+export async function getRanks() {
+  const accounts = players.flatMap((player) => player.accounts);
+  return getRanksForAccountList(accounts);
+}
+
+export async function getRanksForAccounts(accounts: LolAccount[]) {
+  return getRanksForAccountList(accounts);
 }
 
 export async function getLatestDataDragonVersion() {
@@ -83,9 +103,9 @@ export async function getSummonerIcons(accounts: any[]) {
     const url = `${PLATFORM_BASE_URL}/lol/summoner/v4/summoners/by-puuid/${account.puuid}`;
     const userName = account.gameName;
     try {
-      const data = await riotFetch(url, 86400);
-      if (data) {
-        const iconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${data.profileIconId}.png`;
+      const result = await riotFetch(url, 86400);
+      if (result.data) {
+        const iconUrl = `https://ddragon.leagueoflegends.com/cdn/${version}/img/profileicon/${result.data.profileIconId}.png`;
         icons.push({ userName, iconUrl });
       }
     } catch (err) {
@@ -99,11 +119,15 @@ export async function getSummonerIcons(accounts: any[]) {
   return icons;
 }
 
+export function weekAgoStartTimeSeconds(now = Date.now()) {
+  const weekAgo = Math.floor((now - 7 * 24 * 60 * 60 * 1000) / 1000);
+  return weekAgo - (weekAgo % 3600);
+}
+
 export async function getMatchHistoryIDs(
   puuid: string,
   options?: { count?: number; queue?: number; startTime?: number },
 ) {
-  let matchHistory;
   try {
     const params = new URLSearchParams({
       start: '0',
@@ -114,48 +138,66 @@ export async function getMatchHistoryIDs(
       params.set('startTime', String(options.startTime));
     }
 
-    const response = await riotFetch(
+    const result = await riotFetch(
       `${REGIONAL_BASE_URL}/lol/match/v5/matches/by-puuid/${puuid}/ids?${params}`,
+      300,
     );
-    matchHistory = response;
+    return result;
   } catch (err) {
     console.error(`Error fetching matches for ${puuid}`, err);
+    return { ok: false, rateLimited: false, data: null };
   }
-
-  return matchHistory;
 }
 
 export async function getMatchHistoryInfo(matchId: string) {
-  let matchHistoryInfo;
   try {
-    const response = await riotFetch(
+    const result = await riotFetch(
       `${REGIONAL_BASE_URL}/lol/match/v5/matches/${matchId}`,
       604800,
     );
-    matchHistoryInfo = response;
+    return result;
   } catch (err) {
     console.error(`Error fetching match information for ${matchId}`, err);
+    return { ok: false, rateLimited: false, data: null };
   }
-
-  return matchHistoryInfo;
 }
+
+export type MatchHistoryResult = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  matches: any[];
+  rateLimited: boolean;
+  failed: boolean;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getPlayerMatchHistory(
   accounts: any[],
   options?: { count?: number; queue?: number; startTime?: number },
-) {
+): Promise<MatchHistoryResult> {
   const matches = [];
+  let rateLimited = false;
+  let failed = false;
 
   for (const account of accounts) {
     try {
-      const matchIds = await getMatchHistoryIDs(account.puuid, options);
-      if (!Array.isArray(matchIds)) continue;
-      for (const matchId of matchIds) {
-        const match = await getMatchHistoryInfo(matchId);
-        if (match) matches.push(match);
+      const idsResult = await getMatchHistoryIDs(account.puuid, options);
+      if (idsResult.rateLimited) rateLimited = true;
+      if (!idsResult.ok || !Array.isArray(idsResult.data)) {
+        failed = true;
+        continue;
+      }
+
+      for (const matchId of idsResult.data) {
+        const matchResult = await getMatchHistoryInfo(matchId);
+        if (matchResult.rateLimited) rateLimited = true;
+        if (!matchResult.ok || !matchResult.data) {
+          failed = true;
+          continue;
+        }
+        matches.push(matchResult.data);
       }
     } catch (err) {
+      failed = true;
       console.error(
         `Error fetching match history for ${account.gameName}#${account.tagLine}:`,
         err,
@@ -163,5 +205,5 @@ export async function getPlayerMatchHistory(
     }
   }
 
-  return matches;
+  return { matches, rateLimited, failed };
 }
