@@ -164,6 +164,13 @@ export function HomeClient({
             >
               Everyone
             </button>
+            <button
+              type='button'
+              className={`${styles.nameBubble} ${styles.nameBubbleAll}`}
+              onClick={() => setSelectedIds(['Matt', 'Kiwi', 'Dorkynerd'])}
+            >
+              Soloq Race
+            </button>
             {players.map((player) => {
               const active = selectedIds.includes(player.id);
               return (
