@@ -5,7 +5,7 @@ import styles from './page.module.css';
 import type { Player } from '@/lib/players';
 import { PlayerCard } from './PlayerCard';
 import { PlayerAvatar } from './PlayerAvatar';
-import { ThemeToggle } from './ThemeToggle';
+import { SiteNav } from './SiteNav';
 
 type SortMode = 'default' | 'az' | 'accounts' | 'soloRank' | 'flexRank';
 
@@ -107,24 +107,16 @@ export function HomeClient({
   return (
     <div className={styles.page}>
       <main className={styles.main}>
+        <SiteNav />
+
         <header className={styles.header}>
           <div className={styles.headerText}>
             <h1 className={styles.title}>chogwarts accounts</h1>
             <p className={styles.subtitle}>
               {players.length} players &middot;{' '}
               {players.reduce((sum, p) => sum + p.accounts.length, 0)} accounts
-              {' · '}
-              <a
-                href='https://savagepastaman.com/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className={styles.playerExtraLink}
-              >
-                SOLO Q BET LINK
-              </a>
             </p>
           </div>
-          <ThemeToggle />
         </header>
 
         <div className={styles.filterBar}>

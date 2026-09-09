@@ -1,12 +1,11 @@
 import { Suspense } from 'react';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { players } from '@/lib/players';
 import { getSummonerIcons } from '@/lib/riot';
 import { PlayerAvatar } from '../PlayerAvatar';
 import { AccountRow } from '../AccountRow';
 import { CopyLinkButton } from '../CopyLinkButton';
-import { ThemeToggle } from '../ThemeToggle';
+import { SiteNav } from '../SiteNav';
 import { MatchHistory } from './MatchHistory';
 import styles from '../page.module.css';
 
@@ -37,9 +36,7 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Link href='/' className={styles.backLink}>
-          &larr; All accounts
-        </Link>
+        <SiteNav />
 
         <div className={styles.profileHeader}>
           <PlayerAvatar
@@ -55,7 +52,6 @@ export default async function PlayerPage(props: PageProps<'/[id]'>) {
             </p>
           </div>
           <CopyLinkButton />
-          <ThemeToggle />
         </div>
 
         <ul className={styles.accounts}>

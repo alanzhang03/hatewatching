@@ -670,6 +670,722 @@
   background: var(--accent-soft);
 }
 
+.siteNav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--foreground);
+  box-shadow: var(--shadow);
+}
+
+.siteNavBrand {
+  flex-shrink: 0;
+  padding: 0 4px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text-primary);
+}
+
+.siteNavBrand:hover {
+  color: var(--accent);
+}
+
+.siteNavLinks {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.siteNavLink {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.siteNavLink:hover {
+  color: var(--text-primary);
+  background: var(--chip-bg);
+}
+
+.siteNavLinkActive {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.siteNavLinkActive:hover {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.betSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.betSectionNote {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+.betGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.betCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--foreground);
+  box-shadow: var(--shadow);
+}
+
+.betCardTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.betPlace {
+  font-family: var(--font-geist-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+}
+
+.betCardIdentity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.betCardIdentity:hover .betCardName {
+  color: var(--accent);
+}
+
+.betCardName {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+  transition: color 0.15s ease;
+}
+
+.betCardAka {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.betGamesLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--row-bg);
+}
+
+.betGamesLeftValue {
+  font-family: var(--font-geist-mono);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.betGamesLeftOver {
+  color: #d24f4f;
+}
+
+.betStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.betStatLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.betStatValue {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+  color: var(--text-primary);
+}
+
+.betStatCap {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.betStatMeta {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.betMatchList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+}
+
+.betMatchItem {
+  border-radius: 12px;
+  border-left: 3px solid var(--border);
+  background: var(--row-bg);
+  overflow: hidden;
+}
+
+.betMatchSummary {
+  display: grid;
+  grid-template-columns: minmax(140px, 1.4fr) auto minmax(90px, 1.1fr) minmax(90px, 1fr) auto;
+  align-items: center;
+  gap: 12px 14px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.betMatchSummary:hover {
+  background: color-mix(in srgb, var(--chip-hover) 65%, transparent);
+}
+
+.betMatchChampCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.betMatchChampIcon {
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.betMatchSummaryMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.betMatchChevron {
+  display: inline-flex;
+  width: 18px;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: transform 0.15s ease;
+}
+
+.betMatchChevronOpen {
+  transform: rotate(180deg);
+}
+
+.betMatchDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scoreboardTeam {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--foreground);
+}
+
+.scoreboardTeamWin {
+  border-color: color-mix(in srgb, #2fa75f 35%, var(--border));
+}
+
+.scoreboardTeamLoss {
+  border-color: color-mix(in srgb, #d24f4f 30%, var(--border));
+}
+
+.scoreboardTeamHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  background: var(--row-bg);
+}
+
+.scoreboardTeamResultWin {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2fa75f;
+}
+
+.scoreboardTeamResultLoss {
+  font-size: 12px;
+  font-weight: 700;
+  color: #d24f4f;
+}
+
+.scoreboardTeamMeta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.scoreboardPlayers {
+  display: flex;
+  flex-direction: column;
+}
+
+.scoreboardPlayer {
+  display: grid;
+  grid-template-columns:
+    auto minmax(90px, 1.2fr) minmax(64px, 0.7fr) minmax(80px, 1fr) auto minmax(140px, 1.3fr);
+  align-items: center;
+  gap: 8px 10px;
+  padding: 7px 10px;
+  border-top: 1px solid var(--border);
+}
+
+.scoreboardPlayer:first-child {
+  border-top: 0;
+}
+
+.scoreboardPlayerFocus {
+  background: var(--accent-soft);
+}
+
+.scoreboardChampBlock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.scoreboardChampWrap {
+  position: relative;
+  width: 28px;
+  height: 28px;
+}
+
+.scoreboardChampIcon {
+  border-radius: 4px;
+  display: block;
+}
+
+.scoreboardLevel {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: var(--foreground);
+  border: 1px solid var(--border);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.scoreboardIdentity {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.scoreboardName {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scoreboardName:hover {
+  color: var(--accent);
+}
+
+.scoreboardRole {
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.scoreboardKda {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+  color: var(--text-primary);
+}
+
+.scoreboardKdaRatio {
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.scoreboardDamage {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.scoreboardDamageTrack {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--row-bg);
+}
+
+.scoreboardDamageFill {
+  height: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 75%, #d24f4f);
+}
+
+.scoreboardDamageValue {
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.scoreboardCs {
+  font-size: 11px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.scoreboardItems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 2px;
+}
+
+.scoreboardItemEmpty {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  background: var(--chip-bg);
+  opacity: 0.5;
+}
+
+@media (max-width: 860px) {
+  .scoreboardPlayer {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'champ identity kda'
+      'champ damage cs'
+      'items items items';
+  }
+
+  .scoreboardChampBlock {
+    grid-area: champ;
+  }
+
+  .scoreboardIdentity {
+    grid-area: identity;
+  }
+
+  .scoreboardKda {
+    grid-area: kda;
+    justify-self: end;
+    text-align: right;
+  }
+
+  .scoreboardDamage {
+    grid-area: damage;
+  }
+
+  .scoreboardCs {
+    grid-area: cs;
+    justify-self: end;
+  }
+
+  .scoreboardItems {
+    grid-area: items;
+    justify-content: flex-start;
+    padding-top: 2px;
+  }
+}
+
+.betMatchDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.betMatchDetailValue {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.betMatchDetailValueMuted {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+
+.betMatchLoadout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.betMatchSpells {
+  display: flex;
+  gap: 4px;
+}
+
+.betMatchSpells img,
+.betMatchItemIcon {
+  border-radius: 4px;
+  background: var(--chip-bg);
+}
+
+.betMatchItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.betMatchItemEmpty {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: var(--chip-bg);
+  opacity: 0.55;
+}
+
+.betMatchWho {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.betMatchProfileGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.betMatchAvatarStack {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.betMatchAvatarStackMulti .betMatchAvatarLink + .betMatchAvatarLink {
+  margin-left: -10px;
+}
+
+.betMatchAvatarLink {
+  position: relative;
+  display: inline-flex;
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--row-bg);
+}
+
+.betMatchAvatarLink:hover {
+  z-index: 1;
+}
+
+.betMatchNames {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.betMatchNameSep {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.betMatchProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.betMatchProfile:hover .betMatchPlayer {
+  color: var(--accent);
+}
+
+.betMatchWhoText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.betMatchAccount {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  margin-left: 38px;
+  font-family: var(--font-geist-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.betMatchAccount:hover {
+  color: var(--accent);
+}
+
+.betMatchKda {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.betMatchKdaRatio {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 720px) {
+  .betMatchSummary {
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      'who result champ'
+      'who kda meta';
+  }
+
+  .betMatchWho {
+    grid-area: who;
+  }
+
+  .betMatchSummary > :nth-child(2) {
+    grid-area: result;
+  }
+
+  .betMatchChampCell {
+    grid-area: champ;
+  }
+
+  .betMatchKda {
+    grid-area: kda;
+  }
+
+  .betMatchSummaryMeta {
+    grid-area: meta;
+    justify-self: end;
+  }
+}
+
+.betProgressTrack {
+  height: 6px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--row-bg);
+}
+
+.betProgressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width 0.2s ease;
+}
+
+.betProgressOver {
+  background: #d24f4f;
+}
+
+.betRules {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 18px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.betRules li::marker {
+  color: var(--text-tertiary);
+}
+
+.betMatchPlayer {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.betMatchPlayer:hover {
+  color: var(--accent);
+}
+
 .iconMoon {
   display: block;
 }

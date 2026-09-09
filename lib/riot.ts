@@ -65,7 +65,7 @@ export async function getRanks() {
   return ranks;
 }
 
-async function getLatestDataDragonVersion() {
+export async function getLatestDataDragonVersion() {
   const res = await fetch(
     'https://ddragon.leagueoflegends.com/api/versions.json',
     { next: { revalidate: 86400 } },
@@ -99,11 +99,23 @@ export async function getSummonerIcons(accounts: any[]) {
   return icons;
 }
 
-export async function getMatchHistoryIDs(puuid: string) {
+export async function getMatchHistoryIDs(
+  puuid: string,
+  options?: { count?: number; queue?: number; startTime?: number },
+) {
   let matchHistory;
   try {
+    const params = new URLSearchParams({
+      start: '0',
+      count: String(options?.count ?? 5),
+    });
+    if (options?.queue != null) params.set('queue', String(options.queue));
+    if (options?.startTime != null) {
+      params.set('startTime', String(options.startTime));
+    }
+
     const response = await riotFetch(
-      `${REGIONAL_BASE_URL}/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=5`,
+      `${REGIONAL_BASE_URL}/lol/match/v5/matches/by-puuid/${puuid}/ids?${params}`,
     );
     matchHistory = response;
   } catch (err) {
@@ -129,12 +141,16 @@ export async function getMatchHistoryInfo(matchId: string) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getPlayerMatchHistory(accounts: any[]) {
+export async function getPlayerMatchHistory(
+  accounts: any[],
+  options?: { count?: number; queue?: number; startTime?: number },
+) {
   const matches = [];
 
   for (const account of accounts) {
     try {
-      const matchIds = await getMatchHistoryIDs(account.puuid);
+      const matchIds = await getMatchHistoryIDs(account.puuid, options);
+      if (!Array.isArray(matchIds)) continue;
       for (const matchId of matchIds) {
         const match = await getMatchHistoryInfo(matchId);
         if (match) matches.push(match);
