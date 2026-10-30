@@ -21,14 +21,19 @@ type RankAccount = {
   puuid: string;
 };
 
-async function riotFetch(url: string, revalidate = 600): Promise<RiotFetchResult> {
+export async function riotFetch(
+  url: string,
+  revalidate: number | 'no-store' = 600,
+): Promise<RiotFetchResult> {
   if (!RIOT_API_TOKEN) {
     throw new Error('RIOT_API_KEY is not set');
   }
 
   const res = await fetch(url, {
     headers: { 'X-Riot-Token': RIOT_API_TOKEN },
-    next: { revalidate },
+    ...(revalidate === 'no-store'
+      ? { cache: 'no-store' as const }
+      : { next: { revalidate } }),
   });
 
   if (res.status === 429) {

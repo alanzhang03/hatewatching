@@ -54,6 +54,7 @@ export type BetMatchRowData = {
   kda: string;
   duration: string;
   timeAgo: string;
+  queueLabel?: string;
   role: string;
   champLevel: number;
   cs: number;

@@ -7,9 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "script": "tsx --env-file=.env.local scripts/script.ts"
+    "script": "tsx --env-file=.env.local scripts/script.ts",
+    "db:migrate": "tsx --env-file=.env.local scripts/migrate.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^1.2.0",
     "next": "16.3.1",
     "react": "19.2.8",
     "react-dom": "19.2.8"

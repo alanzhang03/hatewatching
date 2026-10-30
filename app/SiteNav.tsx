@@ -6,7 +6,18 @@ import { ThemeToggle } from './ThemeToggle';
 import styles from './page.module.css';
 
 const LINKS = [
-  { href: '/', label: 'Accounts', match: (path: string) => path === '/' || !path.startsWith('/soloq-bet') },
+  {
+    href: '/',
+    label: 'Accounts',
+    match: (path: string) =>
+      path === '/' ||
+      !(path.startsWith('/soloq-bet') || path.startsWith('/feed')),
+  },
+  {
+    href: '/feed',
+    label: 'Feed',
+    match: (path: string) => path === '/feed',
+  },
   {
     href: '/soloq-bet',
     label: 'Soloq bet',

@@ -369,6 +369,7 @@ export function BetMatchList({ matches }: { matches: BetMatchRowData[] }) {
 
                   <span className={styles.betMatchSummaryMeta}>
                     <span className={styles.matchMeta}>
+                      {match.queueLabel && `${match.queueLabel} · `}
                       {match.duration} · {match.timeAgo}
                     </span>
                     <span

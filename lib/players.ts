@@ -16,12 +16,6 @@ export const players: Player[] = [
     displayName: 'Cloudee',
     accounts: [
       {
-        gameName: 'Cloudee',
-        tagLine: '1234',
-        puuid:
-          'TkDnpotUZ_cPd-c2X0ScEqIc4Tz6TcUqjcwPWYUoRrAvsVeK_acbPUAnAq3Z1MsxJmH7OTPyg9DDTA',
-      },
-      {
         gameName: 'thorwinonions',
         tagLine: 'NA1',
         puuid:
