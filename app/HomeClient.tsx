@@ -7,7 +7,13 @@ import { PlayerCard } from './PlayerCard';
 import { PlayerAvatar } from './PlayerAvatar';
 import { SiteNav } from './SiteNav';
 
-type SortMode = 'default' | 'az' | 'accounts' | 'soloRank' | 'flexRank';
+type SortMode =
+  | 'default'
+  | 'az'
+  | 'accounts'
+  | 'soloRank'
+  | 'flexRank'
+  | 'premadeRank';
 
 const TIER_ORDER = {
   IRON: 0,
@@ -100,6 +106,12 @@ export function HomeClient({
           bestRankScore(b, ranks, 'RANKED_FLEX_SR') -
           bestRankScore(a, ranks, 'RANKED_FLEX_SR'),
       );
+    } else if (sortMode === 'premadeRank') {
+      result = [...result].sort(
+        (a, b) =>
+          bestRankScore(b, ranks, 'RANKED_PREMADE_5x5') -
+          bestRankScore(a, ranks, 'RANKED_PREMADE_5x5'),
+      );
     }
     return result;
   }, [query, sortMode, selectedIds, players, ranks]);
@@ -137,6 +149,7 @@ export function HomeClient({
                 <option value='default'>Default order</option>
                 <option value='soloRank'>Soloq rank (highest first)</option>
                 <option value='flexRank'>Flexq rank (highest first)</option>
+                <option value='premadeRank'>5s rank (highest first)</option>
                 <option value='az'>Name A–Z</option>
                 <option value='accounts'># of accounts</option>
               </select>

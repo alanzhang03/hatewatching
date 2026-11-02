@@ -21,6 +21,7 @@ const TIER_CLASS = {
 const QUEUES = [
   { type: 'RANKED_SOLO_5x5', label: 'Solo' },
   { type: 'RANKED_FLEX_SR', label: 'Flex' },
+  { type: 'RANKED_PREMADE_5x5', label: '5s' },
 ];
 
 function formatTier(tier: string) {
