@@ -1520,3 +1520,7 @@
 :root[data-theme="dark"] .iconSun {
   display: block;
 }
+
+.modeBubble {
+  text-decoration: none;
+}

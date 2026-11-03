@@ -34,8 +34,12 @@ export const SCHEMA = [
   `create index if not exists match_participants_puuid_idx on match_participants (puuid)`,
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function getRecentMatches(puuids: string[], limit = 50): Promise<any[]> {
+export async function getRecentMatches(
+  puuids: string[],
+  limit = 50,
+  queueIds?: readonly number[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): Promise<any[]> {
   const sql = getSql();
   const rows = (await sql`
     select m.data
@@ -44,8 +48,25 @@ export async function getRecentMatches(puuids: string[], limit = 50): Promise<an
       select 1 from match_participants mp
       where mp.match_id = m.match_id and mp.puuid = any(${puuids}::text[])
     )
+    and (${queueIds ?? null}::int[] is null or m.queue_id = any(${queueIds ?? null}::int[]))
     order by m.game_end desc
     limit ${limit}
   `) as { data: unknown }[];
   return rows.map((row) => row.data);
+}
+
+export async function getQueueCounts(
+  puuids: string[],
+): Promise<Map<number, number>> {
+  const sql = getSql();
+  const rows = (await sql`
+    select m.queue_id, count(*)::int as count
+    from matches m
+    where exists (
+      select 1 from match_participants mp
+      where mp.match_id = m.match_id and mp.puuid = any(${puuids}::text[])
+    )
+    group by m.queue_id
+  `) as { queue_id: number; count: number }[];
+  return new Map(rows.map((row) => [row.queue_id, row.count]));
 }

@@ -1,5 +1,6 @@
 import type { LolAccount, Player } from '@/lib/players';
 import { opggUrl } from '@/lib/links';
+import { QUEUE_LABELS } from '@/lib/queues';
 import {
   championIconUrl,
   formatKda,
@@ -13,18 +14,6 @@ import {
   type BetMatchRowData,
   type BetMatchTeam,
 } from './matchUtils';
-
-const QUEUE_LABELS: Record<number, string> = {
-  420: 'Ranked Solo',
-  440: 'Ranked Flex',
-  400: 'Normal Draft',
-  430: 'Normal Blind',
-  450: 'ARAM',
-  490: 'Quickplay',
-  900: 'ARURF',
-  1700: 'Arena',
-  1900: 'URF',
-};
 
 function timeAgo(timestamp: number) {
   const minutes = Math.floor((Date.now() - timestamp) / 60000);
